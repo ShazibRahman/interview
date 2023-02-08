@@ -1,0 +1,15 @@
+
+couchbase:
+  env:
+    timeouts:
+      connect: 2000
+      query: 80000
+      view: 30000
+      key-value: 20000
+      max-request-lifetime: 10000
+      auto-release-after : 30000
+  bootstrap-hosts: 127.0.0.1
+  bucket:
+    name: interview
+    password: password
+
