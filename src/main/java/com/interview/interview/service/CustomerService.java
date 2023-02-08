@@ -1,6 +1,7 @@
 package com.interview.interview.service;
 
 
+import com.interview.interview.DTO.CustomerResponseDTO;
 import com.interview.interview.DTO.SignupRequest;
 import com.interview.interview.repository.model.Customer;
 import com.interview.interview.repository.repos.CustomerRepository;
@@ -8,6 +9,8 @@ import com.interview.interview.util.IdGenerator;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
+import static org.springframework.beans.BeanUtils.copyProperties;
 
 @Service
 public class CustomerService {
@@ -42,14 +45,17 @@ public class CustomerService {
             throw new IllegalArgumentException("Email already exists");
         }
     }
-        public Customer createCustomer(SignupRequest request) {
+        public CustomerResponseDTO createCustomer(SignupRequest request) {
             validateRequest(request);
             Customer customer = new Customer();
             customer.setId(idGenerator.getCustomerId());
             customer.setEmail(request.getEmail());
             customer.setUserName(request.getName());
             customer.setPassword(request.getPassword());
-            return customerRepository.save(customer);
+            Customer customerAfterSave = customerRepository.save(customer);
+            CustomerResponseDTO customerResponseDTO = new CustomerResponseDTO();
+            copyProperties(customerAfterSave, customerResponseDTO);
+            return customerResponseDTO;
         }
 
 

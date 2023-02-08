@@ -14,20 +14,6 @@ import java.util.stream.Stream;
 @SpringBootApplication
 public class InterviewApplication {
 
-	@Autowired
-	private CustomerRepository customerRepository;
-
-
-	@PostConstruct
-	public void init(){
-		List<Customer> customers = Stream.of(
-				new Customer("1", "John", "john@gmail.com","password"),
-				new Customer("2", "Bob", "bob@gmail.com","password")
-		).collect(Collectors.toList());
-		customerRepository.saveAll(customers);
-	}
-
-
 	public static void main(String[] args) {
 		SpringApplication.run(InterviewApplication.class, args);
 	}

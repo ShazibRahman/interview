@@ -1,5 +1,6 @@
 package com.interview.interview.service;
 
+import com.interview.interview.DTO.CustomerResponseDTO;
 import com.interview.interview.DTO.SignupRequest;
 import com.interview.interview.repository.model.Customer;
 import com.interview.interview.repository.repos.CustomerRepository;
@@ -34,7 +35,7 @@ public class CustomerServiceTest {
         Customer expectedCustomer = new Customer("generatedId", "test@email.com", "test@email.com", "testPassword");
 
 
-        Customer actualCustomer = customerService.createCustomer(request);
+        CustomerResponseDTO actualCustomer = customerService.createCustomer(request);
 
         Assertions.assertEquals(expectedCustomer.getEmail(), actualCustomer.getEmail());
     }
